@@ -1,51 +1,75 @@
 import { lazy, Suspense, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from './components/Loader/Loader';
+import Loader from './components/Loader';
 import Container from './components/Container';
-import Navigation from './components/Navigation/Navigation';
-import ProductsPage from './components/ProductsPage/ProductsPage';
+import Navigation from './components/Navigation';
+import ProductsPage from './components/ProductsPage';
 import styles from './App.module.css';
-// const ProductsPage = lazy(() =>
-//   import('./components/ProductsPage/ProductsPage' /* webpackChunkName: "ProductsPage"*/),
-// );
 import productsData from './data/products.json';
 const ShoppingBasket = lazy(() =>
-  import(
-    './components/ShoppingBasket/ShoppingBasket' /* webpackChunkName: "ShoppingBasket"*/
-  )
+  import('./components/ShoppingBasket' /* webpackChunkName: "ShoppingBasket"*/),
 );
+
+const toastOptions = {
+  position: 'top-right',
+  autoClose: 1000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+};
 
 export default function App() {
   const [basket, setBasket] = useState([]);
 
-  const addToBasket = (product) => {
-    setBasket((state) => {
-      const foundIndex = state.findIndex((el) => el.name === product.name);
+  const addToBasket = product => {
+    setBasket(state => {
+      const foundIndex = state.findIndex(el => el.name === product.name);
+      toast.success('Товар добавлен в корзину', toastOptions);
 
       if (foundIndex === -1) {
         const newProduct = { ...product, amount: 1 };
-        console.log('amount ', newProduct.amount);
         return [...state, newProduct];
       } else {
         const newState = state.map((el, idx) => {
           if (idx === foundIndex) {
-            el.amount += 1;
+            return { ...el, amount: el.amount + 1 };
           }
-          console.log('element -', el);
+
           return el;
         });
-        console.log('newState -', newState);
         return newState;
       }
     });
   };
 
+  const deleteFromBasket = product => {
+    let newState;
+
+    if (product.amount > 1) {
+      const foundIndex = basket.findIndex(el => el.name === product.name);
+
+      newState = basket.map((el, idx) => {
+        if (idx === foundIndex) {
+          return { ...el, amount: el.amount - 1 };
+        }
+        return el;
+      });
+    } else {
+      newState = basket.filter(el => el.name !== product.name);
+    }
+    toast.info('Товар удалён', toastOptions);
+    setBasket(newState);
+  };
+
   return (
     <Container>
       <header className={styles.header}>
-        <Navigation />
+        <Navigation basket={basket} />
       </header>
 
       <Suspense fallback={<Loader />}>
@@ -59,7 +83,7 @@ export default function App() {
           </Route>
 
           <Route path="/shoppingBasket">
-            <ShoppingBasket />
+            <ShoppingBasket basket={basket} onDelete={deleteFromBasket} />
           </Route>
 
           <Redirect to="/" />

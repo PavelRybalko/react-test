@@ -1,4 +1,5 @@
 .link {
+  position: relative;
   display: inline-block;
   text-decoration: none;
   padding: 12px;
@@ -14,4 +15,20 @@
 .activeLink {
   composes: link;
   color: #c72b67;
+}
+
+.basketLabel {
+  font-size: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  right: 0px;
+  top: 5px;
+  background-color: rgb(42, 167, 42);
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
 }

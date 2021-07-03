@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Navigation.module.css';
 
-export default function Navigation() {
+export default function Navigation({ basket }) {
   return (
     <nav>
       <NavLink
@@ -10,14 +10,16 @@ export default function Navigation() {
         className={styles.link}
         activeClassName={styles.activeLink}
       >
-        Home
+        Главная
       </NavLink>
+
       <NavLink
         to="/shoppingBasket"
         className={styles.link}
         activeClassName={styles.activeLink}
       >
-        Basket
+        {!!basket.length && <div className={styles.basketLabel}>+</div>}
+        Корзина
       </NavLink>
     </nav>
   );

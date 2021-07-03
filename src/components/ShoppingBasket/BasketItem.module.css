@@ -1,4 +1,15 @@
-.productItem {
+.productName {
+  font-size: 20px;
+}
+
+.productCost {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2196f3;
+  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+}
+
+.basketItem {
   position: relative;
   padding: 10px;
   display: flex;
@@ -9,17 +20,6 @@
   border-radius: 10px;
   width: 200px;
   box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.05);
-}
-
-.productName {
-  font-size: 20px;
-  margin: 0;
-}
-
-.productPrice {
-  font-weight: bold;
-  font-size: 16px;
-  color: #2196f3;
 }
 
 .boughtAmount {

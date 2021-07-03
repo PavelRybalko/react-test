@@ -1,34 +1,39 @@
-import { useState, useEffect } from 'react';
-// import {
-//   Link,
-//   Route,
-//   useRouteMatch,
-//   useLocation,
-//   useHistory,
-// } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import Loader from '../Loader/Loader';
+import BasketItem from './BasketItem';
 import s from './ShoppingBasket.module.css';
 
-export default function ShoppingBasket() {
-  // const [query, setQuery] = useState('');
-  // const [movies, setMovies] = useState(null);
-  // const { path, url } = useRouteMatch();
-  // const location = useLocation();
-  // const history = useHistory();
+export default function ShoppingBasket({ basket, onDelete }) {
+  const calculateDiscount = (amount, price) => {
+    let result = 0;
+    for (let i = 1; i <= amount; i++) {
+      i % 3 === 0 ? (result += price / 2) : (result += price);
+    }
+    return result;
+  };
 
-  // const onInputChange = ({ target }) => {
-  //   setQuery(target.value);
-  // };
-
-  // const onSubmit = e => {
-  //   e.preventDefault();
-  //   if (query.trim() === '') {
-  //     return toast.error('Введите слово для поиска');
-  //   }
-  //   history.push({ ...location, search: `searchQuery=${query}` });
-  //   setQuery('');
-  // };
-
-  return <div className="basket"></div>;
+  return (
+    <>
+      <h2>Корзина</h2>
+      {basket.length === 0 && (
+        <h1 style={{ color: 'grey' }}>Вы не добавили ни одного товара</h1>
+      )}
+      <ul className={s.productList}>
+        {basket.map(product => {
+          return (
+            <BasketItem
+              image={product.image}
+              amount={product.amount}
+              key={product.name}
+              name={product.name}
+              price={
+                product.name === 'Папайя'
+                  ? calculateDiscount(product.amount, product.price)
+                  : product.amount * product.price
+              }
+              onClick={() => onDelete(product)}
+            />
+          );
+        })}
+      </ul>
+    </>
+  );
 }
