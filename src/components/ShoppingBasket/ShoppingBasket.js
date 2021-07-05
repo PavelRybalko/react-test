@@ -12,9 +12,11 @@ export default function ShoppingBasket({ basket, onDelete }) {
 
   return (
     <>
-      <h2>Корзина</h2>
+      <h2 className={s.basketTitle}>Корзина</h2>
       {basket.length === 0 && (
-        <h1 style={{ color: 'grey' }}>Вы не добавили ни одного товара</h1>
+        <h1 className={s.basketTitle} style={{ color: 'grey' }}>
+          Вы не добавили ни одного товара
+        </h1>
       )}
       <ul className={s.productList}>
         {basket.map(product => {

@@ -1,3 +1,7 @@
 .header {
   border-bottom: 1px solid black;
 }
+
+p {
+  margin: 5px 0px;
+}

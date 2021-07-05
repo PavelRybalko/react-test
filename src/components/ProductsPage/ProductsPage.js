@@ -11,16 +11,17 @@ function ProductsPage({ products, onAddToBasket, basket }) {
 
   return (
     <>
-      <h2>Продукты</h2>
+      <h2 className={s.productTitle}>Продукты</h2>
       <ul className={s.productList}>
         {products.map(product => (
           <ProductItem
             amount={countBoughtAmount(product)}
             key={product.name}
-            image={product.image}
-            name={product.name}
-            price={product.price}
-            onClick={() => onAddToBasket(product)}
+            product={product}
+            // image={product.image}
+            // name={product.name}
+            // price={product.price}
+            onSubmit={onAddToBasket}
           />
         ))}
       </ul>

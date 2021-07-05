@@ -1,9 +1,9 @@
 .productItem {
   position: relative;
-  padding: 10px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   /* border: 1px solid black; */
   border-radius: 10px;
@@ -13,13 +13,19 @@
 
 .productName {
   font-size: 20px;
-  margin: 0;
 }
 
 .productPrice {
   font-weight: bold;
   font-size: 16px;
   color: #2196f3;
+}
+
+.additionalText {
+  font-size: 12px;
+  position: absolute;
+  color: red;
+  top: 148px;
 }
 
 .boughtAmount {
@@ -44,6 +50,7 @@
 }
 
 .productButton {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +69,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 16px;
-  width: calc(100% - 16px);
+  width: 100%;
 }
 
 .productButton:hover {
@@ -70,6 +77,41 @@
   background-color: #1976d2;
 }
 
+.productButton:active {
+  top: 1px;
+  left: 1px;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3), 0 1px 1px #fff,
+    inset 0 1px 2px rgba(0, 0, 0, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
 .button__icon {
   margin-right: 8px;
+}
+
+.quantityBlock {
+  margin-top: 5px;
+  display: flex;
+  font-size: 20px;
+}
+.quantityArrowMinus,
+.quantityArrowPlus {
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px 12px;
+  width: 40px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border-color: #fff;
+  background-color: #2196f3;
+  color: #fff;
+  outline: none;
+}
+
+.quantityNum {
+  border-color: lightgrey;
+  width: 72px;
+  font-size: 18px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  outline: none;
 }

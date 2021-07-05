@@ -8,7 +8,7 @@ export default function BasketItem({ amount, image, name, price, onClick }) {
       <p className={s.productName}>{name}</p>
       <p className={s.productCost}>Всего : {price} $</p>
       <button className={s.productButton} type="button" onClick={onClick}>
-        <i className="material-icons button__icon">shopping_cart</i>
+        <i className="material-icons button__icon">delete</i>
         Убрать
       </button>
     </li>

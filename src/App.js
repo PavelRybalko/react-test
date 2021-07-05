@@ -26,18 +26,18 @@ const toastOptions = {
 export default function App() {
   const [basket, setBasket] = useState([]);
 
-  const addToBasket = product => {
+  const addToBasket = (product, productAmount) => {
     setBasket(state => {
       const foundIndex = state.findIndex(el => el.name === product.name);
       toast.success('Товар добавлен в корзину', toastOptions);
 
       if (foundIndex === -1) {
-        const newProduct = { ...product, amount: 1 };
+        const newProduct = { ...product, amount: productAmount };
         return [...state, newProduct];
       } else {
         const newState = state.map((el, idx) => {
           if (idx === foundIndex) {
-            return { ...el, amount: el.amount + 1 };
+            return { ...el, amount: el.amount + productAmount };
           }
 
           return el;
