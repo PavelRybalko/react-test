@@ -25,7 +25,7 @@
   font-size: 12px;
   position: absolute;
   color: red;
-  top: 148px;
+  top: 150px;
 }
 
 .boughtAmount {
@@ -93,6 +93,7 @@
   display: flex;
   font-size: 20px;
 }
+
 .quantityArrowMinus,
 .quantityArrowPlus {
   cursor: pointer;

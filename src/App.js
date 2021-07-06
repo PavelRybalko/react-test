@@ -26,36 +26,47 @@ const toastOptions = {
 export default function App() {
   const [basket, setBasket] = useState([]);
 
-  const addToBasket = (product, productAmount) => {
-    setBasket(state => {
-      const foundIndex = state.findIndex(el => el.name === product.name);
-      toast.success('Товар добавлен в корзину', toastOptions);
+  const addProduct = (product, productAmount) => {
+    const foundIndex = basket.findIndex(el => el.name === product.name);
+    toast.success('Товар добавлен в корзину', toastOptions);
 
-      if (foundIndex === -1) {
-        const newProduct = { ...product, amount: productAmount };
-        return [...state, newProduct];
-      } else {
-        const newState = state.map((el, idx) => {
-          if (idx === foundIndex) {
-            return { ...el, amount: el.amount + productAmount };
-          }
-
-          return el;
-        });
-        return newState;
-      }
-    });
+    if (foundIndex === -1) {
+      const newProduct = { ...product, amount: productAmount };
+      setBasket(
+        state => [...state, newProduct],
+        () => {
+          console.log(
+            'Функция которая выполнится в конце обновления состояния.(в классовых компонентах есть!)',
+          );
+        },
+      );
+    } else {
+      setBasket(state =>
+        state.map(
+          (el, idx) =>
+            idx === foundIndex
+              ? { ...el, amount: el.amount + productAmount }
+              : el,
+          // {
+          //   if (idx === foundIndex) {
+          //     return { ...el, amount: el.amount + productAmount };
+          //   }
+          //   return el;
+          // }
+        ),
+      );
+    }
   };
 
-  const deleteFromBasket = product => {
+  const deleteProduct = (product, productAmount) => {
     let newState;
 
-    if (product.amount > 1) {
+    if (product.amount > 1 && product.amount !== productAmount) {
       const foundIndex = basket.findIndex(el => el.name === product.name);
 
       newState = basket.map((el, idx) => {
         if (idx === foundIndex) {
-          return { ...el, amount: el.amount - 1 };
+          return { ...el, amount: el.amount - productAmount };
         }
         return el;
       });
@@ -77,13 +88,13 @@ export default function App() {
           <Route path="/" exact>
             <ProductsPage
               products={productsData}
-              onAddToBasket={addToBasket}
+              onAddToBasket={addProduct}
               basket={basket}
             />
           </Route>
 
           <Route path="/shoppingBasket">
-            <ShoppingBasket basket={basket} onDelete={deleteFromBasket} />
+            <ShoppingBasket basket={basket} onDelete={deleteProduct} />
           </Route>
 
           <Redirect to="/" />

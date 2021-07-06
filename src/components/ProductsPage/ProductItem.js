@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import p from 'prop-types';
 import s from './ProductItem.module.css';
+// import QuantityBlock from './QuantityBlock';
 
 function ProductItem({ amount, product, onSubmit }) {
   const [productAmount, setProductAmount] = useState(1);
@@ -28,7 +29,6 @@ function ProductItem({ amount, product, onSubmit }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    debugger;
     onSubmit(product, productAmount);
 
     setProductAmount(1);
@@ -49,11 +49,12 @@ function ProductItem({ amount, product, onSubmit }) {
         <button
           className={s.productButton}
           type="submit"
-          // onClick={onClick}
+          // onClick={onSubmit}
         >
           <i className="material-icons button__icon">shopping_cart</i>
           Купить
         </button>
+        {/* <QuantityBlock handleChange={handleChange} productAmount={productAmount}/> */}
         <div className={s.quantityBlock}>
           <button
             type="button"
@@ -71,8 +72,7 @@ function ProductItem({ amount, product, onSubmit }) {
             min="1"
             value={productAmount}
             onChange={handleChange}
-            // size="2"
-            // className={s.buyCounter}
+            size="2"
           />
           <button
             type="button"
@@ -90,7 +90,14 @@ function ProductItem({ amount, product, onSubmit }) {
 }
 
 ProductItem.propTypes = {
-  // product: p.objectOf(p.string),
+  product: p.arrayOf(
+    p.shape({
+      name: p.string.isRequired,
+      image: p.string.isRequired,
+      price: p.number.isRequired,
+      amount: p.number,
+    }),
+  ),
   onSubmit: p.func.isRequired,
 };
 

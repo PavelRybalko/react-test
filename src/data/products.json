@@ -6,13 +6,13 @@
     "image": "https://media.istockphoto.com/photos/fresh-whole-half-and-sliced-banana-picture-id1194873081?b=1&k=6&m=1194873081&s=170667a&w=0&h=qDo4vSjjsbXIrObltkc7RPP3r2vMUrcTLviUVHjxdmo="
   },
   {
-    "amount": 0,
+    "amount": null,
     "name": "Яблоко",
     "price": 8,
     "image": "https://cdn.pixabay.com/photo/2017/09/10/18/11/apple-2736410_960_720.png"
   },
   {
-    "amount": 0,
+    "amount": null,
     "name": "Папайя",
     "price": 10,
     "image": "https://media.istockphoto.com/photos/whole-and-half-of-ripe-papaya-fruit-with-seeds-isolated-on-white-picture-id864053288?b=1&k=6&m=864053288&s=170667a&w=0&h=D46f4Tvj_RNWfu4VBzfClDPLBkkrpmrQAdfnLswSd50="

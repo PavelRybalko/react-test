@@ -10,6 +10,10 @@ export default function ShoppingBasket({ basket, onDelete }) {
     return result;
   };
 
+  const calculateTotal = () => {
+    return basket.reduce((total, item) => total + item.amount * item.price, 0);
+  };
+
   return (
     <>
       <h2 className={s.basketTitle}>Корзина</h2>
@@ -22,20 +26,21 @@ export default function ShoppingBasket({ basket, onDelete }) {
         {basket.map(product => {
           return (
             <BasketItem
-              image={product.image}
-              amount={product.amount}
+              product={product}
               key={product.name}
-              name={product.name}
-              price={
+              subtotalPrice={
                 product.name === 'Папайя'
                   ? calculateDiscount(product.amount, product.price)
                   : product.amount * product.price
               }
-              onClick={() => onDelete(product)}
+              onSubmit={onDelete}
             />
           );
         })}
       </ul>
+      {basket.length > 0 && (
+        <h3 className={s.basketTitle}>Общая сумма = {calculateTotal()} $</h3>
+      )}
     </>
   );
 }

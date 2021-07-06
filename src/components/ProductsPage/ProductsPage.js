@@ -30,7 +30,12 @@ function ProductsPage({ products, onAddToBasket, basket }) {
 }
 
 ProductsPage.propTypes = {
-  products: p.arrayOf(p.object).isRequired,
+  products: p.shape({
+      name: p.string.isRequired,
+      image: p.string.isRequired,
+      price: p.number.isRequired,
+      amount: p.number,
+    }),
   onAddToBasket: p.func.isRequired,
   basket: p.array.isRequired,
 };
