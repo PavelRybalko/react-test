@@ -9,6 +9,13 @@
   color: #0077d6;
 }
 
+.additionalText {
+  font-size: 12px;
+  position: absolute;
+  color: red;
+  top: 142px;
+}
+
 .basketItem {
   position: relative;
   padding: 10px;

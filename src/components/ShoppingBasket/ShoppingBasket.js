@@ -11,7 +11,13 @@ export default function ShoppingBasket({ basket, onDelete }) {
   };
 
   const calculateTotal = () => {
-    return basket.reduce((total, item) => total + item.amount * item.price, 0);
+    return basket.reduce(
+      (total, item) =>
+        item.name === 'Папайя'
+          ? total + calculateDiscount(item.amount, item.price)
+          : total + item.amount * item.price,
+      0,
+    );
   };
 
   return (
