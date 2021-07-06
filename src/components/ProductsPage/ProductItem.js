@@ -41,9 +41,11 @@ function ProductItem({ amount, product, onSubmit }) {
       <p className={s.productName}>{product.name}</p>
       <p className={s.productPrice}>{product.price} $</p>
 
-      <p className={s.additionalText}>
-        {product.name === 'Папайя' ? '*Скидка на каждый 3кг 50% !' : ' '}
-      </p>
+      {product.name === 'Папайя' ? (
+        <p className={s.additionalText}>'*Скидка на каждый 3кг 50% !'</p>
+      ) : (
+        ' '
+      )}
 
       <form onSubmit={handleSubmit}>
         <button

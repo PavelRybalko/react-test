@@ -40,9 +40,13 @@ export default function BasketItem({ product, subtotalPrice, onSubmit }) {
       {product.amount && <p className={s.boughtAmount}>{product.amount} шт.</p>}
       <p className={s.productName}>{product.name}</p>
       <p className={s.productCost}>Всего : {subtotalPrice} $</p>
-      <p className={s.additionalText}>
-        {product.name === 'Папайя' ? '*Скидка на каждый 3кг 50% !' : ' '}
-      </p>
+
+      {product.name === 'Папайя' ? (
+        <p className={s.additionalText}>'*Скидка на каждый 3кг 50% !'</p>
+      ) : (
+        ' '
+      )}
+
       <form onSubmit={handleSubmit}>
         <button className={s.productButton} type="submit">
           <i className="material-icons button__icon">shopping_cart</i>
