@@ -42,7 +42,7 @@ export default function BasketItem({ product, subtotalPrice, onSubmit }) {
       <p className={s.productCost}>Всего : {subtotalPrice} $</p>
 
       {product.name === 'Папайя' ? (
-        <p className={s.additionalText}>'*Скидка на каждый 3кг 50% !'</p>
+        <p className={s.additionalText}>*Скидка на каждый 3кг 50% !</p>
       ) : (
         ' '
       )}
