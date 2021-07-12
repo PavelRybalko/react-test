@@ -18,9 +18,6 @@ function ProductsPage({ products, onAddToBasket, basket }) {
             amount={countBoughtAmount(product)}
             key={product.name}
             product={product}
-            // image={product.image}
-            // name={product.name}
-            // price={product.price}
             onSubmit={onAddToBasket}
           />
         ))}
@@ -30,12 +27,14 @@ function ProductsPage({ products, onAddToBasket, basket }) {
 }
 
 ProductsPage.propTypes = {
-  products: p.shape({
+  products: p.arrayOf(
+    p.shape({
       name: p.string.isRequired,
       image: p.string.isRequired,
       price: p.number.isRequired,
       amount: p.number,
     }),
+  ),
   onAddToBasket: p.func.isRequired,
   basket: p.array.isRequired,
 };

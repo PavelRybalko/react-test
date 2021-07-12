@@ -32,37 +32,23 @@ export default function App() {
 
     if (foundIndex === -1) {
       const newProduct = { ...product, amount: productAmount };
-      setBasket(
-        state => [...state, newProduct],
-        () => {
-          console.log(
-            'Функция которая выполнится в конце обновления состояния.(в классовых компонентах есть!)',
-          );
-        },
-      );
+      setBasket(state => [...state, newProduct]);
     } else {
       setBasket(state =>
-        state.map(
-          (el, idx) =>
-            idx === foundIndex
-              ? { ...el, amount: el.amount + productAmount }
-              : el,
-          // {
-          //   if (idx === foundIndex) {
-          //     return { ...el, amount: el.amount + productAmount };
-          //   }
-          //   return el;
-          // }
+        state.map((el, idx) =>
+          idx === foundIndex
+            ? { ...el, amount: el.amount + productAmount }
+            : el,
         ),
       );
     }
   };
 
-  const deleteProduct = (product, productAmount) => {
+  const deleteProduct = ({ amount, name }, productAmount) => {
     let newState;
 
-    if (product.amount > 1 && product.amount !== productAmount) {
-      const foundIndex = basket.findIndex(el => el.name === product.name);
+    if (amount > 1 && amount !== productAmount) {
+      const foundIndex = basket.findIndex(el => el.name === name);
 
       newState = basket.map((el, idx) => {
         if (idx === foundIndex) {
@@ -71,7 +57,7 @@ export default function App() {
         return el;
       });
     } else {
-      newState = basket.filter(el => el.name !== product.name);
+      newState = basket.filter(el => el.name !== name);
     }
     toast.info('Товар удалён', toastOptions);
     setBasket(newState);
@@ -80,7 +66,7 @@ export default function App() {
   return (
     <Container>
       <header className={styles.header}>
-        <Navigation basket={basket} />
+        <Navigation basketLength={basket.length} />
       </header>
 
       <Suspense fallback={<Loader />}>

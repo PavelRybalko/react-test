@@ -1,4 +1,5 @@
 import BasketItem from './BasketItem';
+import p from 'prop-types';
 import s from './ShoppingBasket.module.css';
 
 export default function ShoppingBasket({ basket, onDelete }) {
@@ -50,3 +51,15 @@ export default function ShoppingBasket({ basket, onDelete }) {
     </>
   );
 }
+
+ShoppingBasket.propTypes = {
+  basket: p.arrayOf(
+    p.shape({
+      name: p.string.isRequired,
+      image: p.string.isRequired,
+      price: p.number.isRequired,
+      amount: p.number,
+    }),
+  ).isRequired,
+  onDelete: p.func.isRequired,
+};

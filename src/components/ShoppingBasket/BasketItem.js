@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import p from 'prop-types';
 import s from './BasketItem.module.css';
 
 export default function BasketItem({ product, subtotalPrice, onSubmit }) {
@@ -86,3 +87,14 @@ export default function BasketItem({ product, subtotalPrice, onSubmit }) {
     </li>
   );
 }
+
+BasketItem.propTypes = {
+  product: p.shape({
+    name: p.string.isRequired,
+    image: p.string.isRequired,
+    price: p.number.isRequired,
+    amount: p.number,
+  }),
+  subtotalPrice: p.number.isRequired,
+  onSubmit: p.func.isRequired,
+};
