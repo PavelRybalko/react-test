@@ -113,6 +113,11 @@
   outline: none;
 }
 
+.quantityArrowMinus:hover,
+.quantityArrowPlus:hover {
+  background-color: #1976d2;
+}
+
 .quantityNum {
   border-color: lightgrey;
   width: 72px;
