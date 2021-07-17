@@ -4,17 +4,13 @@ import s from './ShoppingBasket.module.css';
 
 export default function ShoppingBasket({ basket, onDelete }) {
   const calculateDiscount = (amount, price) => {
-    let result = 0;
-    for (let i = 1; i <= amount; i++) {
-      i % 3 === 0 ? (result += price / 2) : (result += price);
-    }
-    return result;
+    return amount * price - Math.floor(amount / 3) * (price / 2);
   };
 
   const calculateTotal = () => {
     return basket.reduce(
       (total, item) =>
-        item.name === 'Папайя'
+        item.name === 'Папайя' && item.amount >= 3
           ? total + calculateDiscount(item.amount, item.price)
           : total + item.amount * item.price,
       0,
